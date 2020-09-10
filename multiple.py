@@ -80,4 +80,20 @@ def superpos_cnot_prob():
     plt.show()
 
 
-superpos_cnot_prob()
+def other_bell():
+    """
+    1/sqrt(2) (|01> + |10>)
+    """
+    qc.x(1)
+    qc.h(0)
+    qc.cx(0, 1)
+
+    qc.measure(0, 0)
+    qc.measure(1, 1)
+    backend = q.Aer.get_backend('qasm_simulator')
+    results = q.execute(qc, backend).result().get_counts()
+    plot_histogram(results)
+    plt.show()
+
+
+other_bell()
